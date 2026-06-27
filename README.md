@@ -7,16 +7,11 @@ AMOS adalah sistem pintar pemilah sampah logam dan non-logam otomatis berbasis I
 ## ✨ Fitur Utama
 
 1. **🧠 Smart Hybrid Mode**
-   - **Deteksi Objek Presisi**
-      Sensor Ultrasonik dipasang di dalam platform pemilahan untuk mendeteksi sampah (default jarak deteksi pemantauan <= 10 cm).
-   - **Evaluasi Polling Pintar**
-      Ketika sampah dideteksi oleh Ultrasonik, sistem akan memulai waktu tunggu (Timer Evaluasi). Jika sensor Proximity mendeteksi logam sebelum waktu habis, servo akan langsung membuang sampah ke jalur **Logam**. Jika waktu habis tanpa deteksi logam, sampah dianggap **Non-Logam** dan dibuang ke jalur sebaliknya.
-   - **Proteksi Platform Tersumbat**
-      Setelah proses pembuangan selesai, sistem mendeteksi platform sekali lagi. Jika sampah masih terdeteksi (karena tersumbat/nyangkut), robot masuk ke status aman `PLATFORM TERTUTUP` untuk melindungi servo dari eror pergerakan berulang.
-   - **Abaikan US saat Membuang**
-      Sensor Ultrasonik diabaikan secara otomatis ketika pintu servo sedang terbuka guna menghindari deteksi palsu akibat gerakan daun pintu penutup.
-   - **Nonaktif saat Berjalan**
-      Seluruh aktivitas sensor pembacaan sampah dinonaktifkan otomatis ketika robot dalam mode bergerak (RC Mode) agar hemat daya.
+   - **Deteksi Objek Presisi**<br>Sensor Ultrasonik dipasang di dalam platform pemilahan untuk mendeteksi sampah (default jarak deteksi pemantauan <= 10 cm).
+   - **Evaluasi Polling Pintar**<br>Ketika sampah dideteksi oleh Ultrasonik, sistem akan memulai waktu tunggu (Timer Evaluasi). Jika sensor Proximity mendeteksi logam sebelum waktu habis, servo akan langsung membuang sampah ke jalur **Logam**. Jika waktu habis tanpa deteksi logam, sampah dianggap **Non-Logam** dan dibuang ke jalur sebaliknya.
+   - **Proteksi Platform Tersumbat**<br>Setelah proses pembuangan selesai, sistem mendeteksi platform sekali lagi. Jika sampah masih terdeteksi (karena tersumbat/nyangkut), robot masuk ke status aman `PLATFORM TERTUTUP` untuk melindungi servo dari eror pergerakan berulang.
+   - **Abaikan US saat Membuang**<br>Sensor Ultrasonik diabaikan secara otomatis ketika pintu servo sedang terbuka guna menghindari deteksi palsu akibat gerakan daun pintu penutup.
+   - **Nonaktif saat Berjalan**<br>Seluruh aktivitas sensor pembacaan sampah dinonaktifkan otomatis ketika robot dalam mode bergerak (RC Mode) agar hemat daya.
 
 2. **⚙️ Kalibrasi Dinamis (EEPROM)**
    - Mengubah parameter sensitivitas secara instan dari menu Settings pada Web UI:
@@ -56,19 +51,18 @@ AMOS adalah sistem pintar pemilah sampah logam dan non-logam otomatis berbasis I
 ### 🤖 Fisik Robot AMOS
 | Tampak Depan | Tampak Belakang |
 | :---: | :---: |
-| ![Tampak Depan](docs/images/robot_depan.jpg) | ![Tampak Belakang](docs/images/robot_belakang.jpg) |
+| ![Tampak Depan](Assets/Tampak%20Depan.jpeg) | ![Tampak Belakang](Assets/Tampak%20Belakang.jpeg) |
 
 ### 🌐 Antarmuka Kontrol (Web UI)
 | Control Hub (Power OFF) | Control Hub (Power ON) | Menu Konfigurasi Robot |
 | :---: | :---: | :---: |
-| ![UI Power Off](docs/images/ui_power_off.jpg) | ![UI Power On](docs/images/ui_power_on.jpg) | ![UI Settings](docs/images/ui_settings.jpg) |
+| ![UI Power Off](Assets/Control%20Hub%20Mati.jpg) | ![UI Power On](Assets/Control%20Hub%20Hidup.jpg) | ![UI Settings](Assets/Konfigurasi%20Robot.jpg) |
 
 ---
 
 ## 🛠️ Prasyarat Instalasi
 
 1. **Board Manager ESP8266**
-   Pastikan paket board ESP8266 telah terinstal di Arduino IDE
 2. **Library external**
    - **ArduinoJson** (Versi 7.x.x)
 
