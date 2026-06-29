@@ -194,7 +194,7 @@ graph TD
     ReturnToIdle2 --> Idle
 
     %% Style & Color Customization (ISO Standard Conformity)
-    classDef state fill:#4f46e5,stroke:#000,stroke-width:1.5px,color:#fff;
+    classDef state fill:#0ea5e9,stroke:#000,stroke-width:1.5px,color:#fff;
     classDef process fill:#0ea5e9,stroke:#000,stroke-width:1.5px,color:#fff;
     classDef decision fill:#FF6D00,stroke:#000,stroke-width:1.5px,color:#fff;
 
