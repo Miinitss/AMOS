@@ -65,22 +65,22 @@ AMOS adalah sistem pintar pemilah sampah logam dan non-logam otomatis berbasis I
 ```mermaid
 graph TD
     %% Nodes Definition
-    Start([Mulai / Power On])
-    InitSerial[Inisialisasi Serial 115200]
-    LoadEEPROM[Muat Pengaturan dari EEPROM]
-    CheckMagic{Apakah Magic Number Valid?}
-    ResetDefault[Muat Konfigurasi Default & Simpan ke EEPROM]
-    InitHardware[Inisialisasi Pin Motor, US, Prox & Servo]
-    StartWiFi[Inisialisasi Wi-Fi AP: AMOS RC]
-    StartServer[Start Web Server & mDNS Hostname: amos.local]
-    MainLoop[Titik Mulai Loop]
-    HandleClient[server.handleClient - Layani Kontrol Web]
-    MDNSUpdate[MDNS.update]
-    CheckFailSafe{Sistem Aktif & Bergerak & Tidak ada Perintah > 1 Detik?}
-    ForceStop[Hentikan Motor & Reset isMoving = false]
-    CheckSystemActive{Apakah Sistem Aktif / Power ON?}
-    SorterUpdate[sorter.update isMoving]
-    LoopEnd[Ulangi Loop]
+    Start(["Mulai atau Power On"])
+    InitSerial["Inisialisasi Serial 115200"]
+    LoadEEPROM["Muat Pengaturan dari EEPROM"]
+    CheckMagic{"Apakah Magic Number valid?"}
+    ResetDefault["Muat Konfigurasi Default & Simpan ke EEPROM"]
+    InitHardware["Inisialisasi Pin Motor, US, Prox & Servo"]
+    StartWiFi["Inisialisasi Wi-Fi AP: AMOS RC"]
+    StartServer["Start Web Server & mDNS Hostname: amos.local"]
+    MainLoop["Titik Mulai Loop"]
+    HandleClient["server.handleClient Layani Kontrol Web"]
+    MDNSUpdate["MDNS.update"]
+    CheckFailSafe{"Sistem Aktif & Bergerak & Tidak ada Perintah > 1 Detik?"}
+    ForceStop["Hentikan Motor & Reset isMoving = false"]
+    CheckSystemActive{"Apakah Sistem Aktif atau Power ON?"}
+    SorterUpdate["sorter.update isMoving"]
+    LoopEnd["Ulangi Loop"]
 
     %% Connections
     Start --> InitSerial
@@ -110,9 +110,9 @@ graph TD
     LoopEnd --> MainLoop
 
     %% Style & Color Customization (ISO Standard Conformity)
-    classDef terminator fill:#10b981,stroke:#047857,color:#fff;
-    classDef process fill:#0ea5e9,stroke:#0284c7,color:#fff;
-    classDef decision fill:#FF6D00,stroke:#78350f,color:#fff;
+    classDef terminator fill:#10b981,stroke:#000,stroke-width:1.5px,color:#fff;
+    classDef process fill:#0ea5e9,stroke:#000,stroke-width:1.5px,color:#fff;
+    classDef decision fill:#FF6D00,stroke:#000,stroke-width:1.5px,color:#fff;
 
     class Start terminator;
     class InitSerial,LoadEEPROM,ResetDefault,InitHardware,StartWiFi,StartServer,MainLoop,HandleClient,MDNSUpdate,ForceStop,SorterUpdate,LoopEnd process;
@@ -123,31 +123,31 @@ graph TD
 ```mermaid
 graph TD
     %% States (Rounded Rectangle represent machine states)
-    Idle[STATE_IDLE: Siaga Menunggu Sampah] 
-    WaitTrash[STATE_WAIT_TRASH: Mengevaluasi Sampah]
-    DiscardMetal[STATE_DISCARD_METAL: Membuang Logam]
-    DiscardNonMetal[STATE_DISCARD_NONMETAL: Membuang Non-Logam]
-    ServoReturn[STATE_SERVO_RETURN: Reset Penutup/Standby]
-    WaitLeave[STATE_WAIT_LEAVE: Menunggu Platform Kosong]
+    Idle["STATE_IDLE Siaga Menunggu Sampah"] 
+    WaitTrash["STATE_WAIT_TRASH Mengevaluasi Sampah"]
+    DiscardMetal["STATE_DISCARD_METAL Membuang Logam"]
+    DiscardNonMetal["STATE_DISCARD_NONMETAL Membuang Non-Logam"]
+    ServoReturn["STATE_SERVO_RETURN Reset Penutup atau Standby"]
+    WaitLeave["STATE_WAIT_LEAVE Menunggu Platform Kosong"]
 
     %% Decisions (Diamond represent conditions)
-    CheckMovement{Apakah Robot Bergerak / Baru Saja Berhenti < 1.5s?}
-    CheckUS{Apakah US Mendeteksi Objek Jarak <= Jarak Pantauan?}
-    CheckProx{Apakah Sensor Proximity Mendeteksi Logam?}
-    CheckTimeout{Apakah Waktu Evaluasi Habis? misal > 5s}
-    CheckDelayDiscard{Apakah Delay Servo Habis? > settings.servoDelayMs}
-    CheckDelayReturn{Apakah Delay Servo Kembali Habis? > settings.servoDelayMs}
-    CheckClear{Apakah Platform Bersih? US Jarak > Jarak Pantauan}
-    CheckClearedManual{Apakah Halangan Disingkirkan? US Jarak > Jarak Pantauan}
+    CheckMovement{"Apakah Robot Bergerak / Baru Saja Berhenti < 1.5s?"}
+    CheckUS{"Apakah US Mendeteksi Objek Jarak <= Jarak Pantauan?"}
+    CheckProx{"Apakah Sensor Proximity Mendeteksi Logam?"}
+    CheckTimeout{"Apakah Waktu Evaluasi Habis? >5s"}
+    CheckDelayDiscard{"Apakah Delay Servo Habis? >3s"}
+    CheckDelayReturn{"Apakah Delay Servo Kembali Habis? >3s"}
+    CheckClear{"Apakah Platform Bersih? US Jarak > Jarak Pantauan"}
+    CheckClearedManual{"Apakah Halangan Disingkirkan? US Jarak > Jarak Pantauan"}
 
     %% Processes (Rectangle represent execution)
-    TriggerWaitTrash[Ubah Status ke STATE_WAIT_TRASH & Mulai Timer]
-    ActDiscardMetal[Putar Servo ke Sudut Logam & Go to STATE_DISCARD_METAL]
-    ActDiscardNon[Putar Servo ke Sudut Non-Logam & Go to STATE_DISCARD_NONMETAL]
-    ActReturn[Kembalikan Servo ke Standby & Go to STATE_SERVO_RETURN]
-    ReturnToIdle[Kembali ke STATE_IDLE]
-    ReturnToIdle2[Kembali ke STATE_IDLE]
-    ActLock[Kunci ke STATE_WAIT_LEAVE]
+    TriggerWaitTrash["Ubah Status ke STATE_WAIT_TRASH & Mulai Timer"]
+    ActDiscardMetal["Putar Servo ke Sudut Logam & Go to STATE_DISCARD_METAL"]
+    ActDiscardNon["Putar Servo ke Sudut Non-Logam & Go to STATE_DISCARD_NONMETAL"]
+    ActReturn["Kembalikan Servo ke Standby & Go to STATE_SERVO_RETURN"]
+    ReturnToIdle["Kembali ke STATE_IDLE"]
+    ReturnToIdle2["Kembali ke STATE_IDLE"]
+    ActLock["Kunci ke STATE_WAIT_LEAVE"]
 
     %% Flow lines
     Idle --> CheckMovement
@@ -194,9 +194,9 @@ graph TD
     ReturnToIdle2 --> Idle
 
     %% Style & Color Customization (ISO Standard Conformity)
-    classDef state fill:#4f46e5,stroke:#3730a3,color:#fff;
-    classDef process fill:#0ea5e9,stroke:#0284c7,color:#fff;
-    classDef decision fill:#FF6D00,stroke:#78350f,color:#fff;
+    classDef state fill:#4f46e5,stroke:#000,stroke-width:1.5px,color:#fff;
+    classDef process fill:#0ea5e9,stroke:#000,stroke-width:1.5px,color:#fff;
+    classDef decision fill:#FF6D00,stroke:#000,stroke-width:1.5px,color:#fff;
 
     class Idle,WaitTrash,DiscardMetal,DiscardNonMetal,ServoReturn,WaitLeave state;
     class TriggerWaitTrash,ActDiscardMetal,ActDiscardNon,ActReturn,ReturnToIdle,ReturnToIdle2,ActLock process;
